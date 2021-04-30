@@ -4,11 +4,15 @@
   "description": "Hcube",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
