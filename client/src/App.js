@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
+import {useState} from 'react'
 import './App.css';
 
 function App() {
+const [value, setValue] = useState(new Date())
+const changeDate = (e) => {
+  setValue(e)
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Calendar id='calendar' onChange={changeDate} value={value} />
+
+      <h1>Date selectionne : {value.toLocaleDateString()}</h1>
     </div>
   );
 }
