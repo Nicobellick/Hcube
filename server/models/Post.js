@@ -6,11 +6,11 @@ const PostSchema = mongoose.Schema({
         required: true
     },
     date: {
-        type: Date
+        type: String
         // required: true
     },
     time: String,
     with: String
 })
 
-module.exports = mongoose.model('Posts', PostSchema)
+module.exports = mongoose.model('rdv', PostSchema)
