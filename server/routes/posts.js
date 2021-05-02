@@ -12,6 +12,9 @@ router.get('/', async (req, res) => {
     }
 })
 
+// Disponibility 
+router.get('/disponibility', (req, res) => {})
+
 // Post with models/Post
 router.post('/', async (req, res) => {
     console.log(req.body)
@@ -19,7 +22,6 @@ router.post('/', async (req, res) => {
         person: req.body.person,
         date: req.body.date,
         time: req.body.time,
-        with: req.body.with
     })
     post.save()
     .then(data => {

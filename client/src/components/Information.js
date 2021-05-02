@@ -1,8 +1,12 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 
-const Information = () => {
-    const [person, setPerson] = useState('')
+const Information = (prevProps) => {
+    const setPerson = prevProps.setPerson
+    
+    const namePerson = (e) => {
+        setPerson(e.target.value)
+    }
 
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
@@ -11,7 +15,9 @@ const Information = () => {
     }, [])
     return(
         <div>
-            <p>{person ? person : 'En attente'}</p>
+            <h1>Votre nom :</h1>
+            <textarea onChange={namePerson}></textarea>
+            
         </div>
     )
 }
