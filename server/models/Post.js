@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
 
 const PostSchema = mongoose.Schema({
-    person: {
+
+    date: {
         type: String,
         required: true
     },
-    date: {
-        type: Date
-        // required: true
-    },
-    time: String,
+    hour: {
+        type: Array,
+        required : true
+    }
 })
 
-module.exports = mongoose.model('rdv', PostSchema)
+module.exports = mongoose.model('available', PostSchema)
+
+

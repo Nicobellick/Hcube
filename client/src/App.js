@@ -8,50 +8,71 @@ import './App.css';
 function App() {
   const [person, setPerson] = useState('')
   const [value, setValue] = useState(new Date())
-  const [time, setTime] = useState('')
   const [horaire, setHoraire] = useState([])
-  const [affichage, setAffichage] = useState(false)
-  const formatDate = {  year: 'numeric', month: 'long', day: 'numeric' };
+  const formatDate = {  year: 'numeric', month: 'numeric', day: 'numeric' };
   // Hours depending time of appointment ( 25min / RDV)
   const hours = ["11h", "11h25", "11h50", "12h15", "14h25", "14h50", "15h15", "15h40", "16h05", "16h30"]
+  const [checkDispo, setCheckDispo] = useState('')
   
-  
-
+// Select date on calendar
 const changeDate = (e) => {
   setValue(e)
 }
-const timing = (e) => {
-  setTime(e.target.value)
-}
-const disponibility = () => {
-  
-  axios.get('http://localhost:4242/posts')
-  .then(res => setHoraire(res.data))
-  .then(console.log(horaire))
-  .then(setAffichage(true))  
 
-  const dispoAvailable = hours.filter(e => horaire.includes(e) )
-  console.log(dispoAvailable)
-}
 useEffect(() => {
   axios.get('http://localhost:4242/posts')
   .then((res) => setHoraire(res.data))
+  .then(console.log(horaire))
 }, [])
+
+
+// 1/  On créer automatiquement une date si elle n'existe pas,ca la crée , puis on revois TIME au complet 
+// 1/  Si la date existe on map [hours]
+
 const postRdv = () => {
+  // UPDATE sur bdd et supprimer dans array le rdv qui est pris par le Client
+  // Puis faire un POST sur RDVS en créant un nouveau "RDVPRIS" avec DATE + HOUR + NAME
   let info = 
     {
-      person: person,
-      date : value,
-      time : time
+      date : value.toLocaleDateString('fr-FR', formatDate),
+      time : hours
   }
   axios.post('http://localhost:4242/posts', info)
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 }
+
+
+
+/*** LORSQUE LON VALIDE  */
+// Supprimer l'horaire choisi de la date Selectionner .
+// UPDATE
+// PUIS on l'ajouter au client -> POST sur la table du client
+
+// Request BDD, if day exist on BDD return true, else false
+const checkDayBdd = () => {
+  // Name collection database
+  let nameBdd = value.toLocaleDateString('fr-FR', formatDate)
+  // Check if already exist
+  axios.get('http://localhost:4242/posts')
+  .then(res => setCheckDispo(res.data))
+  checkDispo.map(dispo => {
+    if(dispo.date === nameBdd){
+      console.log('this date already exist')
+      const availableHours = dispo.hour
+      console.log(availableHours)
+    }else console.log('Doesnt exist')
+  })
+  
+}
+// If false, db.createCollection(nameBDD), if true, check hours available
+
 
   return (
     <div className="App">
       <div className='nameCalendar'>
         <Information setPerson={setPerson}/>
-        <Calendar id='calendar' onChange={changeDate} value={value} />
+        <Calendar id='calendar' onChange={changeDate} value={value} onClickDay={checkDayBdd} />
         <button onClick={postRdv}>Envoyer mon rdv</button>
       </div>
       <div className='disponibility'>
@@ -60,17 +81,7 @@ const postRdv = () => {
         <p>Le mois est : {value.toLocaleDateString('fr-FR', {month: 'long'})}</p>
         <p>Le jour est : {value.toLocaleDateString('fr-FR', {day: 'numeric'})}</p>
         <p>Votre nom est : {person}</p>
-        <button onClick={disponibility}>Verifier les disponibilités</button>
-        <div>
-          {affichage ? horaire.map(horair => 
-             (
-              <li>
-                {horair.time}
-              </li>
-            ))
-           : <div>'Donnée en attente'</div>}
-        </div>
-        <textarea onChange={timing}></textarea>
+        
       </div>
     </div>
   );

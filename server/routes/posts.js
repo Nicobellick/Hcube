@@ -12,25 +12,22 @@ router.get('/', async (req, res) => {
     }
 })
 
-// Disponibility 
-router.get('/disponibility', (req, res) => {})
+// Post RDV : 
 
-// Post with models/Post
-router.post('/', async (req, res) => {
-    console.log(req.body)
-    const post = new Post({
-        person: req.body.person,
-        date: req.body.date,
-        time: req.body.time,
+router.post('/', (req, res) => {
+        console.log(req.body)
+        const post = new Post({
+            date: req.body.date,
+            hour: req.body.time,
+        })
+        post.save()
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            res.json({message: err})
+        })
     })
-    post.save()
-    .then(data => {
-        res.status(200).json(data)
-    })
-    .catch(err => {
-        res.json({message: err})
-    })
-})
-
+    
 
 module.exports = router
