@@ -4,13 +4,17 @@ const Post = require('../models/Post')
 
 // All posts
 router.get('/', async (req, res) => {
-    try {
+    try {      
         const posts = await Post.find()
         res.json(posts)
     } catch (err) {
-        res.json({message:err})
+        res.json('Not work' + {message:err})
     }
 })
+
+// 
+
+
 
 // Post RDV : 
 

@@ -8,3 +8,7 @@
 .nameCalendar {
   width: 400px;
 }
+.listHours{
+  display: flex;
+  flex-direction: column;
+}
