@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Post = require('../models/Post')
 
+
 // All posts
 router.get('/', async (req, res) => {
     try {      
@@ -13,10 +14,12 @@ router.get('/', async (req, res) => {
 })
 
 // 
+// router.get('/', (req, res) => {
+//      Post.find().then(post => res.send(post)).catch(err => console.log(err))
+// })
 
 
-
-// Post RDV : 
+// Post New Day : 
 
 router.post('/', (req, res) => {
         console.log(req.body)
