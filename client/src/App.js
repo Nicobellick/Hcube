@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react'
-import Calendar from 'react-calendar'
-import Information from './components/Information';
+import {Route, Switch} from 'react-router'
 import axios from 'axios'
+import Calendar from 'react-calendar'
+import Hours from './components/Hours';
+import Information from './components/Information';
 import 'react-calendar/dist/Calendar.css'
 import './App.css';
-import Hours from './components/Hours';
+import Admin from './components/Admin';
 
 function App() {
   const [person, setPerson] = useState('') // Name of client
@@ -26,13 +28,11 @@ const checkDatabase = () => {
   .then(console.log(mapcheck))
 }
 
-// Select date on calendar
 
+// Select date on calendar
 const changeDate = (e) => {
   setDayChoose(e)
-
 }
-
 // Convert selected day in 00/00/0000
 useEffect((formatDate) => {
 
@@ -42,21 +42,6 @@ useEffect((formatDate) => {
 
  // eslint-disable-next-line 
 }, [dayChoose])
-
-const create = (e) => {
-  console.log('Post RDV :' + e)
- // postRdv(e)
-}
-
-// Get all DB with all date
-
-// useEffect(() => {
-//   axios.get('http://localhost:4242/posts')
-//   .then((res) => setCheckDispo(res.data))
-//   .then(setMapcheck(checkDispo.map((e) => e.date)))
-
-//   // eslint-disable-next-line
-// }, [day]) // Refresh when change day on calendar
 
 const postRdv = (day) => {
   // UPDATE sur bdd et supprimer dans array le rdv qui est pris par le Client
@@ -71,16 +56,13 @@ const postRdv = (day) => {
   .catch(err => console.log(err))
   alert('Day create in BDD !')
 }
-
-// If false, db.createCollection(nameBDD), if true, check hours available
-
-
   return (
     <div className="App">
+      <Switch>
+        <Route exact path='/'>
       <div className='nameCalendar'>
         <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
         <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
-        {/* <Hours checkDispo={checkDispo} day={day} setHourSelected={setHourSelected}/> */}
         <button onClick={postRdv}>Cree le jour</button>
       </div>
       <div className='disponibility'>
@@ -89,16 +71,13 @@ const postRdv = (day) => {
         <div className='hoursAppointments'>
           <h2>Disponibility for this day :</h2>
           <Hours checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
-          {/* {checkDispo.map((dispo) => 
-            {if(dispo.date === day){
-             let list = dispo.hour.map((avail, i) => (<button onClick={checkDayBddValidation} value={avail} key={i} >{avail}</button>))  
-             return(<div className='listHours'>{list}</div>)
-            }else return(null)
-          }
-            
-          )} */}
         </div>
       </div>
+      </Route>
+        <Route path='/admin' >
+          <Admin />
+        </Route>
+        </Switch>
       </div>
     
   );

@@ -9,7 +9,7 @@
 .nameCalendar {
   width: 500px;
   background-color: antiquewhite;
-  text-align: center;
+  text-align: -webkit-center;
 }
 .listHours{
   display: flex;
