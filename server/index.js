@@ -17,6 +17,8 @@ app.use(
 // Routes
 const postsRoute = require('./routes/posts')
 app.use('/posts', postsRoute);
+const rdvsRoute = require('./routes/rdvs')
+app.use('/rdvs', rdvsRoute)
 
 
 

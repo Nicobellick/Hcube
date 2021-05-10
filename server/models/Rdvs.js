@@ -1,19 +1,19 @@
 const mongoose = require('mongoose')
 
-const PostSchema = mongoose.Schema({
+const RdvSchema = mongoose.Schema({
 
     date: {
         type: String,
         required: true
     },
     hour: {
-        type: Array,
+        type: String,
         required : true
-    }
+    },
     person: {
         type: String,
         required: true
     }
 })
 
-module.exports = mongoose.model('rdv', PostSchema)
+module.exports = mongoose.model('rdv', RdvSchema)

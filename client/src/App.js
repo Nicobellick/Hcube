@@ -26,12 +26,6 @@ const checkDatabase = () => {
   .then(console.log(mapcheck))
 }
 
-
-// Check DB after create new day
-
-
-
-
 // Select date on calendar
 
 const changeDate = (e) => {
@@ -64,12 +58,12 @@ const create = (e) => {
 //   // eslint-disable-next-line
 // }, [day]) // Refresh when change day on calendar
 
-const postRdv = (e) => {
+const postRdv = (day) => {
   // UPDATE sur bdd et supprimer dans array le rdv qui est pris par le Client
   // Puis faire un POST sur RDVS en créant un nouveau "RDVPRIS" avec DATE + HOUR + NAME
   let info = 
     {
-      date : e,
+      date : day,
       time : hours
   }
   axios.post('http://localhost:4242/posts', info)
@@ -77,21 +71,6 @@ const postRdv = (e) => {
   .catch(err => console.log(err))
   alert('Day create in BDD !')
 }
-
-
-
-/*** Set hour selected  */
-// 
-// const checkDayBddValidation = (e) => {
-//   const selected = e.target.value
-//   setHourSelected(selected)
-//   console.log('selected : ' + selected)
-// }
-
-const confirmRdv = (guy, day, when) => {
- // Post RDV
-}
-
 
 // If false, db.createCollection(nameBDD), if true, check hours available
 
@@ -109,7 +88,7 @@ const confirmRdv = (guy, day, when) => {
         <p>Votre nom est : {person}</p>
         <div className='hoursAppointments'>
           <h2>Disponibility for this day :</h2>
-          <Hours checkDispo={checkDispo} setCheckDispo={setCheckDispo} day={day} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
+          <Hours checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
           {/* {checkDispo.map((dispo) => 
             {if(dispo.date === day){
              let list = dispo.hour.map((avail, i) => (<button onClick={checkDayBddValidation} value={avail} key={i} >{avail}</button>))  
