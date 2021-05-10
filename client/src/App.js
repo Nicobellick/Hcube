@@ -79,9 +79,9 @@ const postRdv = (day) => {
     <div className="App">
       <div className='nameCalendar'>
         <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
-        <Calendar id='calendar' onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
+        <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
         {/* <Hours checkDispo={checkDispo} day={day} setHourSelected={setHourSelected}/> */}
-        <button onClick={postRdv}>Envoyer mon rdv</button>
+        <button onClick={postRdv}>Cree le jour</button>
       </div>
       <div className='disponibility'>
         <h1>Date selectionne : {dayChoose.toLocaleDateString('fr-FR', formatDate)}</h1>

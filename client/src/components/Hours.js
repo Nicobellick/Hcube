@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import './Hours.css'
 
 const Hours = (prevProps) => {
     const {setHourSelected, person, hourSelected, checkDispo, setCheckDispo, day, mapcheck, setMapcheck } = prevProps
@@ -45,7 +46,7 @@ const Hours = (prevProps) => {
               <div className='hoursAvailable'>
               {checkDispo.map((dispo) => 
             {if(dispo.date === day){
-             let list = dispo.hour.map((avail, i) => (<button onClick={checkDayBddValidation} value={avail} key={i} >{avail}</button>))  
+             let list = dispo.hour.map((avail, i) => (<button onClick={checkDayBddValidation} className='listOfHours' value={avail} key={i} >{avail}</button>))  
              return(<div className='listHours'>{list}</div>)
             }else return(null)
           }
