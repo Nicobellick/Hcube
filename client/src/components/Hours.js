@@ -3,17 +3,31 @@ import axios from 'axios'
 import './Hours.css'
 
 const Hours = (prevProps) => {
-    const {setHourSelected, person, hourSelected, checkDispo, setCheckDispo, day, mapcheck, setMapcheck } = prevProps
-
+    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day, setMapcheck, mapcheck } = prevProps
+    const [hoursOfDay, setHoursOfDay] = useState([])
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
         .then((res) => setCheckDispo(res.data))
         .then(setMapcheck(checkDispo.map((e) => e.date)))
-        .then(console.log(mapcheck))
+        .then(setHoursOfDay(checkDispo.map((e) => e.hour)))
+        .then(console.log(hoursOfDay))
+        .then(console.log('mapcheck'+mapcheck))
         // .then(setVerif(mapcheck.filter((single) => single === day)))
         // console.log(`Verif : ${verif}`)
        
-      }, [])
+      }, [day])
+
+      const updateBdd = () => {
+
+
+        // MAJ hours after client selected RDV
+        let newArray = []
+        newArray = hours.filter(item => item !== hourSelected)
+        console.log(newArray)
+        
+
+        //   axios.put(`http://localhost:4242/posts/update/${day}`)
+      }
 
       const confirmRdv = () => {
             console.log(hourSelected)
@@ -34,6 +48,10 @@ const Hours = (prevProps) => {
                 alert('RDV create in BDD !')
             }
        }
+    
+    // const update = (day, hour) => {
+    //     axios.put('http://localhost:4242/posts', )
+    // }
 
 
     const checkDayBddValidation = (e) => {
@@ -54,6 +72,7 @@ const Hours = (prevProps) => {
           )}
             </div>
             <button type='submit' onClick={confirmRdv}>Send RDV to database</button>
+            <button type='submit' onClick={updateBdd}>Consolelog</button>
           </div>
       )
 

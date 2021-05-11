@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
+// import Calendar from 'react-calendar'
 
 
 const Admin = () => {
@@ -17,6 +18,20 @@ const Admin = () => {
 
     }
 
+    // const createDay = (day) => {
+    //     // UPDATE sur bdd et supprimer dans array le rdv qui est pris par le Client
+    //     // Puis faire un POST sur RDVS en créant un nouveau "RDVPRIS" avec DATE + HOUR + NAME
+    //     let info = 
+    //       {
+    //         date : day,
+    //         time : hours
+    //     }
+    //     axios.post('http://localhost:4242/posts', info)
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err))
+    //     alert('Day create in BDD !')
+    //   }
+
 
     return(
         <div>
@@ -24,7 +39,7 @@ const Admin = () => {
             {rdv.map((dispo, i) => 
             {
              return(<div className='listRdv'>
-                      <li>Le {dispo.date} a {dispo.hour} avec {dispo.person}</li>  
+                      <li>Le <strong>{dispo.date}</strong> a <strong>{dispo.hour}</strong> avec {dispo.person}</li>  
                     </div>) 
           }  
           )}

@@ -19,6 +19,36 @@ router.get('/', async (req, res) => {
 // })
 
 
+// Update hours availables on day
+router.put('/update/:date', (req, res) => {
+    let date = req.params.date
+    Post.findOne({date: date}, (err, foundObject) => {
+        if(err){
+            console.log(err);
+            res.status(500).send()
+        }else {
+            if(!foundObject){
+                res.status(404).send();
+            }else {
+                if(req.body.date) {
+                    foundObject.date = req.body.date
+                }
+                if(req.body.hour){
+                    foundObject.hour = req.body.hour
+                }
+                foundObject.save((err, updatedObject) => {
+                    if(err){
+                        console.log(err);
+                        res.status(500).send();
+                    }else {
+                        res.send(updatedObject);
+                    }
+                })
+            }
+        }
+    })
+})
+
 // Post New Day : 
 
 router.post('/', (req, res) => {
