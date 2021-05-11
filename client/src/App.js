@@ -19,6 +19,7 @@ function App() {
   const [checkDispo, setCheckDispo] = useState([]) // Entire BDD
   const [hourSelected, setHourSelected] = useState('') // Hour selected by client
   const [mapcheck, setMapcheck] = useState([]) // All days available in BDD
+  const [refresh, setRefresh] = useState(true)
   
 // find index de cette valeur, splice(i, 0) 
 // All database :
@@ -36,17 +37,19 @@ const changeDate = (e) => {
   setDayChoose(e)
 }
 // Convert selected day in 00-00-0000
-useEffect((formatDate) => {
+useEffect(() => {
   let day = dayChoose.toLocaleDateString('fr-FR', {day: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {month: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {year: 'numeric'})
   setDay(day)
   console.log(day)
  // eslint-disable-next-line 
-}, [dayChoose])
+}, [dayChoose, refresh])
 
 // A faire : recuperer l'heure selectionner, let newHour = [heure].splice(heure selectionné), axios.put('/update/${day}', newHour)
 const postRdv = (day) => {
-  // UPDATE sur bdd et supprimer dans array le rdv qui est pris par le Client
-  // Puis faire un POST sur RDVS en créant un nouveau "RDVPRIS" avec DATE + HOUR + NAME
+  if(mapcheck.indexOf(day) > -1){
+    console.log('Day already exist')
+  }else {
+  
   let info = 
     {
       date : day,
@@ -55,7 +58,9 @@ const postRdv = (day) => {
   axios.post('http://localhost:4242/posts', info)
   .then(res => console.log(res))
   .catch(err => console.log(err))
-  alert('Day create in BDD !')
+  alert(`Day ${day} create in BDD !`)
+  checkDatabase()
+}
 }
   return (
     <div className="App">
@@ -71,8 +76,10 @@ const postRdv = (day) => {
         <p>Votre nom est : {person}</p>
         <div className='hoursAppointments'>
           <h2>Disponibility for this day :</h2>
-          <Hours hours={hours} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
-        </div>
+          {refresh ? <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> : 
+          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> }
+           
+          </div>
       </div>
       </Route>
         <Route path='/admin' >
