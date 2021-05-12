@@ -1,16 +1,18 @@
 const mongoose = require('mongoose')
+mongoose.set('useFindAndModify', false);
 
 const PostSchema = mongoose.Schema({
-    person: {
-        type: String,
-        required: true
-    },
+
     date: {
-        type: String
+        type: String,
         // required: true
     },
-    time: String,
-    with: String
+    hour: {
+        type: Array,
+        // required : true
+    }
 })
 
-module.exports = mongoose.model('rdv', PostSchema)
+module.exports = mongoose.model('available', PostSchema)
+
+
