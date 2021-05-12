@@ -77,14 +77,18 @@ const postRdv = (day) => {
       <Switch>
         <Route exact path='/'>
       <div className='nameCalendar'>
-        <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
         <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
+        <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
       </div>
       <div className='disponibility'>
-        <h1>Date selectionne : {dayChoose.toLocaleDateString('fr-FR', formatDate)}</h1>
-        <p>Votre nom est : {person}</p>
+        
+        <h3>Durée du rendez-vous</h3>
+          <div id='delay'>
+            <p id='timeRdv'>25 min</p>
+          </div>
         <div className='hoursAppointments'>
-          <h2>Disponibility for this day :</h2>
+          <h4>Quelle heure vous convient le mieux ?</h4>
+          <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale (Europe)</p>
           
           {/* {refresh ? <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> : 
           <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> } */}

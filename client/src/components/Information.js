@@ -1,25 +1,13 @@
-// import {useEffect} from 'react'
-// import axios from 'axios'
-
+import './Information.css'
 const Information = (prevProps) => {
     const setPerson = prevProps.setPerson
-    // const setCheckDispo = prevProps.setCheckDispo
-    // const checkDispo = prevProps.checkDispo
-    
     const namePerson = (e) => {
         setPerson(e.target.value)
     }
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:4242/posts')
-    //     .then((res) => setCheckDispo(res.data))
-    //     .then(console.log(checkDispo))
-
-    // }, [])
     return(
-        <div>
-            <h1>Votre nom :</h1>
-            <textarea onChange={namePerson}></textarea>
+        <div className='infos'>
+            <label for='name' id='labelName'>Veuillez saisir votre nom et prénom :</label><br/><br/>
+            <input type='text' id='name' name='name' onChange={namePerson}></input>
             
         </div>
     )

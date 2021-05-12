@@ -68,7 +68,12 @@ const Hours = (prevProps) => {
            //  
           ) }
             </div>
-            <button type='submit' onClick={confirmRdv}>Envoyer le rendez-vous</button>
+                <div className='confirm'>
+                {hourSelected !== '' ?
+                    <button id='confirmButton'type='submit' onClick={confirmRdv}>Valider le rendez-vous</button>
+                    :  null
+                }
+                </div>
 
           </div>
       )
