@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
     try {      
         const posts = await Post.find()
         res.json(posts)
+
     } catch (err) {
         res.json('Not work' + {message:err})
     }
@@ -52,7 +53,12 @@ router.put('/update/:date', (req, res) => {
 // Post New Day : 
 
 router.post('/', (req, res) => {
-        console.log(req.body)
+    // Check if day already exist 
+     Post.find({date: req.body.date}, (err, result) => {
+        if(result[0]){
+            console.log('Already exist')
+        }else // Create if doesnt
+        {console.log(req.body.date)
         const post = new Post({
             date: req.body.date,
             hour: req.body.time,
@@ -63,7 +69,11 @@ router.post('/', (req, res) => {
         })
         .catch(err => {
             res.json({message: err})
-        })
+        })}
+
+    })
+    
+
     })
     
 

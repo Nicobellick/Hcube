@@ -27,7 +27,8 @@ const checkDatabase = () => {
   axios.get('http://localhost:4242/posts')
   .then((res) => setCheckDispo(res.data))
   .then(setMapcheck(checkDispo.map((e) => e.date)))
-  .then(console.log(checkDispo))
+
+
 }
 // filter, aller sur RDVS, voir si un jour est pris, si oui regarder les heures et enlever les heureus
 // afficher Hours.filter(e e!== RDVS)
@@ -35,20 +36,21 @@ const checkDatabase = () => {
 // Select date on calendar
 const changeDate = (e) => {
   setDayChoose(e)
+  
 }
 // Convert selected day in 00-00-0000
 useEffect(() => {
   let day = dayChoose.toLocaleDateString('fr-FR', {day: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {month: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {year: 'numeric'})
   setDay(day)
-  console.log(day)
+  
  // eslint-disable-next-line 
-}, [dayChoose, refresh])
+}, [dayChoose])
 
 // A faire : recuperer l'heure selectionner, let newHour = [heure].splice(heure selectionné), axios.put('/update/${day}', newHour)
 const postRdv = (day) => {
   if(mapcheck.indexOf(day) > -1){
     console.log('Day already exist')
-  }else {
+  }else { 
   
   let info = 
     {
@@ -59,9 +61,15 @@ const postRdv = (day) => {
   .then(res => console.log(res))
   .catch(err => console.log(err))
   alert(`Day ${day} create in BDD !`)
-  checkDatabase()
+  // Refresh
+  setTimeout(() => {  
+    setRefresh(!refresh)
+    checkDatabase()
+  }, 1000)
+
 }
 }
+
   return (
     <div className="App">
       <Switch>
@@ -76,8 +84,10 @@ const postRdv = (day) => {
         <p>Votre nom est : {person}</p>
         <div className='hoursAppointments'>
           <h2>Disponibility for this day :</h2>
-          {refresh ? <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> : 
-          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> }
+          
+          {/* {refresh ? <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> : 
+          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> } */}
+          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
            
           </div>
       </div>

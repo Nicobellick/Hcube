@@ -4,11 +4,11 @@ const PostSchema = mongoose.Schema({
 
     date: {
         type: String,
-        required: true
+        // required: true
     },
     hour: {
         type: Array,
-        required : true
+        // required : true
     }
 })
 

@@ -3,23 +3,24 @@ import axios from 'axios'
 import './Hours.css'
 
 const Hours = (prevProps) => {
-    const {setHourSelected, refresh, hours, person, hourSelected, checkDispo, setCheckDispo, day, setMapcheck, mapcheck } = prevProps
+    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day, setMapcheck, mapcheck } = prevProps
     const [hoursOfDay, setHoursOfDay] = useState([])
     
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
         .then((res) => setCheckDispo(res.data))
+
         .then(setMapcheck(checkDispo.map((e) => e.date)))
         .then(setHoursOfDay(checkDispo.map((a) => a.hour)))
-        .then(console.log(mapcheck))
+
         // .then(console.log('Mapcheck =' + mapcheck + 'day =' + day))
         
 
         // .then(setVerif(mapcheck.filter((single) => single === day)))
         // console.log(`Verif : ${verif}`)
-       
+        
       }, [day])
-
+      
       // A faire : Avoir l'index du jour selectionné dans BDD, puis
 
       const updateBdd = () => {
