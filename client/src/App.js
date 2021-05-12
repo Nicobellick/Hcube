@@ -12,7 +12,6 @@ import Addrdv from './components/Addrdv';
 function App() {
   const [person, setPerson] = useState('') // Name of client
   const [dayChoose, setDayChoose] = useState(new Date()) // Day choose in Calendar
-  const formatDate = {  year: 'numeric',  month: 'numeric',  day: 'numeric' }; 
   const [day, setDay] = useState('')
 
   // Hours depending time of appointment ( 25min / RDV)
@@ -22,7 +21,7 @@ function App() {
   const [mapcheck, setMapcheck] = useState([]) // All days available in BDD
   const [refresh, setRefresh] = useState(true)
   
-// find index de cette valeur, splice(i, 0) 
+
 // All database :
 const checkDatabase = () => {
   axios.get('http://localhost:4242/posts')
@@ -31,34 +30,31 @@ const checkDatabase = () => {
 
 
 }
-// filter, aller sur RDVS, voir si un jour est pris, si oui regarder les heures et enlever les heureus
-// afficher Hours.filter(e e!== RDVS)
 
 // Select date on calendar
 const changeDate = (e) => {
-  setDayChoose(e)
-  
+  setDayChoose(e) 
 }
 // Convert selected day in 00-00-0000
 useEffect(() => {
   let day = dayChoose.toLocaleDateString('fr-FR', {day: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {month: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {year: 'numeric'})
   setDay(day)
   // Create day if doesnt exist
-  postRdv(day)
-  
+  postRdv(day) 
  // eslint-disable-next-line 
 }, [dayChoose])
 
-// A faire : recuperer l'heure selectionner, let newHour = [heure].splice(heure selectionné), axios.put('/update/${day}', newHour)
+
 const postRdv = (day) => {
+  // 
   if(mapcheck.indexOf(day) > -1){
-    console.log('Day already exist')
+    return null
   }else { 
-  
+  // Create day if doesnt exist in BDD
   let info = 
     {
       date : day,
-      time : hours
+      time : hours 
   }
   axios.post('http://localhost:4242/posts', info)
   .then(res => console.log(res))
@@ -89,6 +85,7 @@ const postRdv = (day) => {
           </div>
         <div className='hoursAppointments'>
           <h4>Quelle heure vous convient le mieux ?</h4>
+          
           <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale (Europe)</p>
           <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
            
