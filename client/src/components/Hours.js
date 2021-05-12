@@ -13,28 +13,13 @@ const Hours = (prevProps) => {
         .then(setMapcheck(checkDispo.map((e) => e.date)))
         .then(setHoursOfDay(checkDispo.map((a) => a.hour)))
 
-        // .then(console.log('Mapcheck =' + mapcheck + 'day =' + day))
-        
-
-        // .then(setVerif(mapcheck.filter((single) => single === day)))
-        // console.log(`Verif : ${verif}`)
         
       }, [day])
       
       // A faire : Avoir l'index du jour selectionné dans BDD, puis
 
       const updateBdd = () => {
-
-
-        // MAJ hours after client selected RDV
-        let newArray = []
-        // if(hours.length === 10 (donc aucun rdv a ete pris)) 
-        newArray = hours.filter(item => item !== hourSelected)
-        // else hours = daySelected.hour
-        console.log(newArray)
         
-
-        //   axios.put(`http://localhost:4242/posts/update/${day}`)
       }
 
       const confirmRdv = () => {
@@ -54,12 +39,15 @@ const Hours = (prevProps) => {
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
                 alert('Succesfully add')
+
+                // MAJ hours after client selected RDV
+                let newArray = []
+                newArray = hours.filter(item => item !== hourSelected)
+                console.log(newArray)
+                axios.put(`http://localhost:4242/posts/update/${day}`, newArray)
             }
        }
     
-    // const update = (day, hour) => {
-    //     axios.put('http://localhost:4242/posts', )
-    // }
 
   // state qui se modifie 
     const checkDayBddValidation = (e) => {
@@ -80,8 +68,8 @@ const Hours = (prevProps) => {
            //  
           ) }
             </div>
-            <button type='submit' onClick={confirmRdv}>Send RDV to database</button>
-            <button type='submit' onClick={updateBdd}>Consolelog</button>
+            <button type='submit' onClick={confirmRdv}>Envoyer le rendez-vous</button>
+
           </div>
       )
 

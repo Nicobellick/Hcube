@@ -42,6 +42,8 @@ const changeDate = (e) => {
 useEffect(() => {
   let day = dayChoose.toLocaleDateString('fr-FR', {day: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {month: 'numeric'}) + '-' + dayChoose.toLocaleDateString('fr-FR', {year: 'numeric'})
   setDay(day)
+  // Create day if doesnt exist
+  postRdv(day)
   
  // eslint-disable-next-line 
 }, [dayChoose])
@@ -60,7 +62,7 @@ const postRdv = (day) => {
   axios.post('http://localhost:4242/posts', info)
   .then(res => console.log(res))
   .catch(err => console.log(err))
-  alert(`Day ${day} create in BDD !`)
+  console.log(`Day ${day} create in BDD !`)
   // Refresh
   setTimeout(() => {  
     setRefresh(!refresh)
@@ -77,7 +79,6 @@ const postRdv = (day) => {
       <div className='nameCalendar'>
         <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
         <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
-        <button onClick={() => postRdv(day)}>Cree le jour</button>
       </div>
       <div className='disponibility'>
         <h1>Date selectionne : {dayChoose.toLocaleDateString('fr-FR', formatDate)}</h1>

@@ -14,43 +14,56 @@ router.get('/', async (req, res) => {
     }
 })
 
-// 
-// router.get('/', (req, res) => {
-//      Post.find().then(post => res.send(post)).catch(err => console.log(err))
+// Update hours availables on day
+// router.put('/update/:date', (req, res) => {
+//     let date = req.params.date
+//     Post.findOne({date: date}, (err, foundObject) => {
+//         if(err){
+//             console.log(err);
+//             res.status(500).send()
+//         }else {
+//             if(!foundObject){
+//                 res.status(404).send();
+//             }else {
+//                 if(req.body.date) {
+//                     foundObject.date = req.body.date
+//                 }
+//                 if(req.body.hour){
+//                     foundObject.hour = req.body.hour
+//                 }
+//                 foundObject.save((err, updatedObject) => {
+//                     if(err){
+//                         console.log(err);
+//                         res.status(500).send();
+//                     }else {
+//                         res.send(updatedObject);
+//                         console.log(foundObject.hour)
+//                     }
+//                 })
+//             }
+//         }
+//     })
 // })
 
+/// TESTTTTT
 
-// Update hours availables on day
 router.put('/update/:date', (req, res) => {
     let date = req.params.date
-    Post.findOne({date: date}, (err, foundObject) => {
+    let hour = req.body
+    console.log(req.body)
+    
+    Post.findOneAndUpdate({date: date}, {$set:{hour : hour}}, {new: true}, (err, doc) => {
         if(err){
-            console.log(err);
+            console.log(err)
             res.status(500).send()
-        }else {
-            if(!foundObject){
-                res.status(404).send();
-            }else {
-                if(req.body.date) {
-                    foundObject.date = req.body.date
-                }
-                if(req.body.hour){
-                    foundObject.hour = req.body.hour
-                }
-                foundObject.save((err, updatedObject) => {
-                    if(err){
-                        console.log(err);
-                        res.status(500).send();
-                    }else {
-                        res.send(updatedObject);
-                    }
-                })
-            }
         }
+        console.log('Succes ! :' + doc)
     })
+    
+    
 })
 
-// Post New Day : 
+// Create New Day : 
 
 router.post('/', (req, res) => {
     // Check if day already exist 
@@ -74,7 +87,7 @@ router.post('/', (req, res) => {
     })
     
 
-    })
+})
     
 
 module.exports = router
