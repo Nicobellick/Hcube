@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
 import './Hours.css'
+import { useHistory } from 'react-router-dom'
 
 const Hours = (prevProps) => {
     const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day, setMapcheck, mapcheck } = prevProps
     const [hoursOfDay, setHoursOfDay] = useState([])
+    const history = useHistory()
     
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
@@ -18,9 +20,8 @@ const Hours = (prevProps) => {
       
       // A faire : Avoir l'index du jour selectionné dans BDD, puis
 
-      const updateBdd = () => {
-        
-      }
+      
+      
 
       const confirmRdv = () => {
             console.log(hourSelected)
@@ -38,16 +39,21 @@ const Hours = (prevProps) => {
                 axios.post('http://localhost:4242/rdvs', info)
                 .then(res => console.log(res))
                 .catch(err => console.log(err))
-                alert('Succesfully add')
+                
 
                 // MAJ hours after client selected RDV
                 let newArray = []
                 newArray = hours.filter(item => item !== hourSelected)
                 console.log(newArray)
                 axios.put(`http://localhost:4242/posts/update/${day}`, newArray)
+                .then(history.push('/confirm'))
+                
+                
             }
        }
     
+       
+
 
   // state qui se modifie 
     const checkDayBddValidation = (e) => {
@@ -74,6 +80,7 @@ const Hours = (prevProps) => {
                     :  null
                 }
                 </div>
+
 
           </div>
       )

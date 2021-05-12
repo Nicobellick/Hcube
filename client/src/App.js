@@ -7,6 +7,7 @@ import Information from './components/Information';
 import 'react-calendar/dist/Calendar.css'
 import './App.css';
 import Admin from './components/Admin';
+import Addrdv from './components/Addrdv';
 
 function App() {
   const [person, setPerson] = useState('') // Name of client
@@ -77,8 +78,8 @@ const postRdv = (day) => {
       <Switch>
         <Route exact path='/'>
       <div className='nameCalendar'>
-        <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
         <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
+        <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
       </div>
       <div className='disponibility'>
         
@@ -89,16 +90,16 @@ const postRdv = (day) => {
         <div className='hoursAppointments'>
           <h4>Quelle heure vous convient le mieux ?</h4>
           <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale (Europe)</p>
-          
-          {/* {refresh ? <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> : 
-          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/> } */}
           <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
            
-          </div>
+        </div>
       </div>
       </Route>
         <Route path='/admin' >
           <Admin />
+        </Route>
+        <Route path='/confirm'>
+          <Addrdv />
         </Route>
         </Switch>
       </div>
