@@ -6,7 +6,7 @@ const Information = (prevProps) => {
     }
     return(
         <div className='infos'>
-            <label for='name' id='labelName'>Veuillez saisir votre nom et prénom :</label><br/><br/>
+            <label htmlFor='name' id='labelName'>Veuillez saisir votre nom et prénom :</label><br/><br/>
             <input type='text' id='name' name='name' onChange={namePerson}></input>
             
         </div>

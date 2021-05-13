@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 import Calendar from 'react-calendar'
+import './Admin.css'
 
 
 const Admin = () => {
@@ -19,9 +20,12 @@ const Admin = () => {
     const changeDate = (e) => {
         setDayChoose(e) 
       }
+
+
+    // console.log(sort)
       
     return(
-        <div>
+        <div className='all'>
             <Calendar onClickDay={changeDate}></Calendar>
             <h2>Rendez vous du {day} uniquement :</h2>
             {rdv.map((dispo) => 
@@ -30,16 +34,18 @@ const Admin = () => {
                 return(<div className='listRdv'>A <strong>{dispo.hour}</strong> avec <strong>{dispo.person}</strong></div> )
             }else return null
           }
-           //  
+         
           ) }
             <h2>Tout vos prochains rendez-vous</h2>
             {rdv.map((dispo, i) => 
+            
             {
              return(<div className='listRdv'>
                       <li>Le <strong>{dispo.date}</strong> a <strong>{dispo.hour}</strong> avec {dispo.person}</li>  
                     </div>) 
           }  
           )}
+         
         </div>
     )
 }

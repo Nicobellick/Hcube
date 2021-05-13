@@ -19,7 +19,8 @@
 }
 #confirmButton {
     color: whitesmoke;
-    background-color: rgb(120, 177, 120);
+    background-color: purple;
     height: 40px;
     border-radius: 10px;;
+    cursor: pointer;
 }

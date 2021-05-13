@@ -1,21 +1,16 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import axios from 'axios'
 import './Hours.css'
 import { useHistory } from 'react-router-dom'
 
 const Hours = (prevProps) => {
-    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day, setMapcheck, mapcheck } = prevProps
-    const [hoursOfDay, setHoursOfDay] = useState([])
+    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day } = prevProps
     const history = useHistory()
     
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
         .then((res) => setCheckDispo(res.data))
-
-        .then(setMapcheck(checkDispo.map((e) => e.date)))
-        .then(setHoursOfDay(checkDispo.map((a) => a.hour)))
-
-        
+        // eslint-disable-next-line
       }, [day])
       
       // A faire : Avoir l'index du jour selectionné dans BDD, puis
@@ -65,10 +60,10 @@ const Hours = (prevProps) => {
           <div>
               <div className='hoursAvailable'>
 
-              {checkDispo.map((dispo) => 
+              {checkDispo.map((dispo, i) => 
             {if(dispo.date === day){
                 let list = dispo.hour.map((avail, i) => (<button onClick={checkDayBddValidation} className='listOfHours' value={avail} key={i} >{avail}</button>))  
-                return(<div className='listHours'>{list}</div> )
+                return(<div className='listHours' key={i}>{list}</div> )
             }else return null
           }
            //  

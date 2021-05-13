@@ -8,6 +8,7 @@ import 'react-calendar/dist/Calendar.css'
 import './App.css';
 import Admin from './components/Admin';
 import Addrdv from './components/Addrdv';
+import { Link } from 'react-router-dom';
 
 function App() {
   const [person, setPerson] = useState('') // Name of client
@@ -59,7 +60,7 @@ const postRdv = (day) => {
   axios.post('http://localhost:4242/posts', info)
   .then(res => console.log(res))
   .catch(err => console.log(err))
-  console.log(`Day ${day} create in BDD !`)
+
   // Refresh
   setTimeout(() => {  
     setRefresh(!refresh)
@@ -73,6 +74,7 @@ const postRdv = (day) => {
     <div className="App">
       <Switch>
         <Route exact path='/'>
+        <Link to='/admin' id='admin'>Espace Admin</Link>
       <div className='nameCalendar'>
         <Information setPerson={setPerson} setCheckDispo={setCheckDispo} checkDispo={checkDispo}/>
         <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
@@ -86,7 +88,7 @@ const postRdv = (day) => {
         <div className='hoursAppointments'>
           <h4>Quelle heure vous convient le mieux ?</h4>
           
-          <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale (Europe)</p>
+          <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale</p>
           <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
            
         </div>
