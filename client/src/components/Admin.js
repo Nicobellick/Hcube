@@ -3,12 +3,11 @@ import axios from 'axios'
 import Calendar from 'react-calendar'
 import './Admin.css'
 
-
 const Admin = () => {
 
-    const [rdv, setRdv] = useState([]) // Entire BDD
-    const [dayChoose, setDayChoose] = useState(new Date())
-    const [day, setDay] = useState('')
+  const [dayChoose, setDayChoose] = useState(new Date())
+  const [day, setDay] = useState('') // format 0-0-0000
+  const [rdv, setRdv] = useState([]) // Entire BDD
 
     useEffect(() => {
         axios.get('http://localhost:4242/rdvs')
@@ -24,22 +23,20 @@ const Admin = () => {
         <div className='all'>
             <Calendar onClickDay={changeDate}></Calendar>
             <h2>Rendez vous du {day} uniquement :</h2>
-            {rdv.map((dispo) => 
+            {rdv.map((dispo, i) => 
             {if(dispo.date === day){
                   
-                return(<div className='listRdv'>A <strong>{dispo.hour}</strong> avec <strong>{dispo.person}</strong></div> )
+                return(<div className='listRdv' key={i}>A <strong>{dispo.hour}</strong> avec <strong>{dispo.person}</strong></div> )
             }else return null
           }
-         
           ) }
             <h2>Tout vos prochains rendez-vous</h2>
             {rdv.map((dispo, i) => 
-            
             {
-             return(<div className='listRdv'>
-                      <li>Le <strong>{dispo.date}</strong> a <strong>{dispo.hour}</strong> avec {dispo.person}</li>  
+             return(<div className='listRdv' key={i}>
+                      <li key={i}>Le <strong>{dispo.date}</strong> a <strong>{dispo.hour}</strong> avec {dispo.person}</li>  
                     </div>) 
-          }  
+            }  
           )}
          
         </div>

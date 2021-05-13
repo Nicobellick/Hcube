@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const Post = require('../models/Post')
 
-
 // All posts
 router.get('/', async (req, res) => {
     try {      
@@ -14,39 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-// Update hours availables on day
-// router.put('/update/:date', (req, res) => {
-//     let date = req.params.date
-//     Post.findOne({date: date}, (err, foundObject) => {
-//         if(err){
-//             console.log(err);
-//             res.status(500).send()
-//         }else {
-//             if(!foundObject){
-//                 res.status(404).send();
-//             }else {
-//                 if(req.body.date) {
-//                     foundObject.date = req.body.date
-//                 }
-//                 if(req.body.hour){
-//                     foundObject.hour = req.body.hour
-//                 }
-//                 foundObject.save((err, updatedObject) => {
-//                     if(err){
-//                         console.log(err);
-//                         res.status(500).send();
-//                     }else {
-//                         res.send(updatedObject);
-//                         console.log(foundObject.hour)
-//                     }
-//                 })
-//             }
-//         }
-//     })
-// })
-
-/// TESTTTTT
-
+// Update hours available when someone take one
 router.put('/update/:date', (req, res) => {
     let date = req.params.date
     let hour = req.body
