@@ -5,7 +5,7 @@ Dans le dossier Hcube, après avoir clone le projet :
 - cd server > npm i > npm start
 - cd client > npm i > npm start 
 
-Le .env est push exceptionnelement (Jeudi 13 mai) pour ce projet par soucis de simplicité lors de votre test.
+Un .env est à créer à la racine du dossier Hcube, il vous sera communiqué par mail.
 
 /// Details du projet ///
 
