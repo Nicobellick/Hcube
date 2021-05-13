@@ -2,7 +2,7 @@
 
 Dans le dossier Hcube, après avoir clone le projet : 
 
-- cd server > npm i > npm start > crée .env et y coller DB_CONNECTION ( envoyé par mail )
+- cd server > npm i > crée .env et y coller DB_CONNECTION ( envoyé par mail ) > npm start
 
 - cd client > npm i > npm start 
 
