@@ -11,25 +11,22 @@ import 'react-calendar/dist/Calendar.css'
 import './App.css';
 
 function App() {
-  const [person, setPerson] = useState('') // Name of client
-  const [dayChoose, setDayChoose] = useState(new Date()) // Day choose in Calendar
-  const [day, setDay] = useState('')
-
-  // Hours depending time of appointment ( 25min / RDV)
   const hours = ["11h00", "11h25", "11h50", "12h15", "14h25", "14h50", "15h15", "15h40", "16h05", "16h30"]
+  // Hours depending time of appointment ( 25min / RDV) no UTC yet
+  
   const [checkDispo, setCheckDispo] = useState([]) // Entire BDD
+  const [dayChoose, setDayChoose] = useState(new Date()) // Day choose in Calendar
+  const [day, setDay] = useState('') // Format 0-0-0000
   const [hourSelected, setHourSelected] = useState('') // Hour selected by client
   const [mapcheck, setMapcheck] = useState([]) // All days available in BDD
-  const [refresh, setRefresh] = useState(true)
-  
-
+  const [person, setPerson] = useState('') // Name of client
+    
 // All database :
 const checkDatabase = () => {
   axios.get('http://localhost:4242/posts')
   .then((res) => setCheckDispo(res.data))
   .then(setMapcheck(checkDispo.map((e) => e.date)))
 }
-
 // Select date on calendar
 const changeDate = (e) => {
   setDayChoose(e) 
@@ -42,7 +39,6 @@ useEffect(() => {
   postRdv(day) 
  // eslint-disable-next-line 
 }, [dayChoose])
-
 
 const postRdv = (day) => {
   if(mapcheck.indexOf(day) > -1){
@@ -60,12 +56,8 @@ const postRdv = (day) => {
 
   // Refresh
   setTimeout(() => {  
-    setRefresh(!refresh)
     checkDatabase()
-  }, 1000)
-
-}
-}
+  }, 1000)}}
 
   return (
     <div className="App">
@@ -77,17 +69,14 @@ const postRdv = (day) => {
         <Calendar onClickDay={changeDate} value={dayChoose} onChange={checkDatabase} />
       </div>
       <div className='disponibility'>
-        
         <h3>Durée du rendez-vous</h3>
           <div id='delay'>
             <p id='timeRdv'>25 min</p>
           </div>
         <div className='hoursAppointments'>
           <h4>Quelle heure vous convient le mieux ?</h4>
-          
           <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale</p>
-          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} />
-           
+          <Hours hours={hours} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} />
         </div>
       </div>
       </Route>

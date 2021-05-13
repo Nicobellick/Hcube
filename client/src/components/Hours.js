@@ -4,8 +4,8 @@ import axios from 'axios'
 import './Hours.css'
 
 const Hours = (prevProps) => {
-    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day } = prevProps
     const history = useHistory()
+    const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day } = prevProps
     
     useEffect(() => {
         axios.get('http://localhost:4242/posts')
@@ -34,17 +34,13 @@ const Hours = (prevProps) => {
                 let newArray = []
                 newArray = hours.filter(item => item !== hourSelected)
                 axios.put(`http://localhost:4242/posts/update/${day}`, newArray)
-                .then(history.push('/confirm'))
-                
-                
+                .then(history.push('/confirm'))    
             }
-       }
-    
+       }   
     const checkDayBddValidation = (e) => {
         const selected = e.target.value
         setHourSelected(selected)
       }
-
       return(
           <div>
               <div className='hoursAvailable'>
