@@ -6,7 +6,6 @@ Dans le dossier Hcube, après avoir clone le projet :
 
 - cd client > npm i > npm start 
 
-Un .env est à créer à la racine du dossier Hcube, il vous sera communiqué par mail.
 
 /// Details du projet ///
 
