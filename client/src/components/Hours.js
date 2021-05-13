@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import './Hours.css'
-import { useHistory } from 'react-router-dom'
 
 const Hours = (prevProps) => {
     const {setHourSelected, hours, person, hourSelected, checkDispo, setCheckDispo, day } = prevProps
@@ -12,14 +12,8 @@ const Hours = (prevProps) => {
         .then((res) => setCheckDispo(res.data))
         // eslint-disable-next-line
       }, [day])
-      
-      // A faire : Avoir l'index du jour selectionné dans BDD, puis
-
-      
-      
 
       const confirmRdv = () => {
-            console.log(hourSelected)
             if(person.length === 0){
                 alert('Veuillez entrer votre nom')
             } else if(hourSelected === ''){
@@ -39,7 +33,6 @@ const Hours = (prevProps) => {
                 // MAJ hours after client selected RDV
                 let newArray = []
                 newArray = hours.filter(item => item !== hourSelected)
-                console.log(newArray)
                 axios.put(`http://localhost:4242/posts/update/${day}`, newArray)
                 .then(history.push('/confirm'))
                 
@@ -47,10 +40,6 @@ const Hours = (prevProps) => {
             }
        }
     
-       
-
-
-  // state qui se modifie 
     const checkDayBddValidation = (e) => {
         const selected = e.target.value
         setHourSelected(selected)
@@ -66,7 +55,7 @@ const Hours = (prevProps) => {
                 return(<div className='listHours' key={i}>{list}</div> )
             }else return null
           }
-           //  
+
           ) }
             </div>
                 <div className='confirm'>

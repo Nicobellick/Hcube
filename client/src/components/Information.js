@@ -1,4 +1,6 @@
 import './Information.css'
+
+
 const Information = (prevProps) => {
     const setPerson = prevProps.setPerson
     const namePerson = (e) => {

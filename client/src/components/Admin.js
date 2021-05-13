@@ -1,5 +1,5 @@
-import axios from 'axios'
 import {useEffect, useState} from 'react'
+import axios from 'axios'
 import Calendar from 'react-calendar'
 import './Admin.css'
 
@@ -9,7 +9,6 @@ const Admin = () => {
     const [rdv, setRdv] = useState([]) // Entire BDD
     const [dayChoose, setDayChoose] = useState(new Date())
     const [day, setDay] = useState('')
-
 
     useEffect(() => {
         axios.get('http://localhost:4242/rdvs')
@@ -21,9 +20,6 @@ const Admin = () => {
         setDayChoose(e) 
       }
 
-
-    // console.log(sort)
-      
     return(
         <div className='all'>
             <Calendar onClickDay={changeDate}></Calendar>

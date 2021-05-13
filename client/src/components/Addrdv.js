@@ -14,7 +14,7 @@ const Addrdv = () => {
 
     return(
         <div className='successRdv'>
-            <h1>Votre rendez vous à bien été enregistré !</h1><img src={logo} alt='logo green with a litle V inside'></img>
+            <h1>Votre rendez vous à bien été enregistré !</h1><img src={logo} alt='green logo with a litle V inside'></img>
             <p>Vous allez etre automatiquement redirigé vers la page d'accueil..</p>
             
         </div>

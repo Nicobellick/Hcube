@@ -1,14 +1,14 @@
 import {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import {Route, Switch} from 'react-router'
 import axios from 'axios'
+import Addrdv from './components/Addrdv';
+import Admin from './components/Admin';
 import Calendar from 'react-calendar'
 import Hours from './components/Hours';
 import Information from './components/Information';
 import 'react-calendar/dist/Calendar.css'
 import './App.css';
-import Admin from './components/Admin';
-import Addrdv from './components/Addrdv';
-import { Link } from 'react-router-dom';
 
 function App() {
   const [person, setPerson] = useState('') // Name of client
@@ -28,8 +28,6 @@ const checkDatabase = () => {
   axios.get('http://localhost:4242/posts')
   .then((res) => setCheckDispo(res.data))
   .then(setMapcheck(checkDispo.map((e) => e.date)))
-
-
 }
 
 // Select date on calendar
@@ -47,7 +45,6 @@ useEffect(() => {
 
 
 const postRdv = (day) => {
-  // 
   if(mapcheck.indexOf(day) > -1){
     return null
   }else { 
@@ -89,7 +86,7 @@ const postRdv = (day) => {
           <h4>Quelle heure vous convient le mieux ?</h4>
           
           <p id='fuseau'>UTC +02:00 Heure normale d'Europe centrale</p>
-          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} mapcheck={mapcheck} setMapcheck={setMapcheck}/>
+          <Hours hours={hours} refresh={refresh} checkDispo={checkDispo} person={person} setCheckDispo={setCheckDispo} day={day} hourSelected={hourSelected} setHourSelected={setHourSelected} />
            
         </div>
       </div>
