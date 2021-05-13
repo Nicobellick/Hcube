@@ -1,16 +1,64 @@
+html {
+  background-color: rgb(213, 213, 213);
+}
+
 .App {
   display: flex;
   justify-content: center;
 }
+#admin {
+  margin-right: 50px;
+    margin-top: 50px;
+}
 /* Hide button for change year in calendar*/
-.react-calendar__navigation__prev2-button, .react-calendar__navigation__next2-button{
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button{
  display: none;
 }
 .nameCalendar {
+  place-self: center;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   width: 500px;
-  background-color: antiquewhite;
-  text-align: -webkit-center;
+  background-color: rgb(123, 12, 64);
+
 }
+.react-calendar {
+  background-color: rgb(123, 12, 64);
+  border-style: none;
+}
+.react-calendar__month-view__weekdays,
+.react-calendar__navigation__label__labelText,
+.react-calendar__navigation__next-button,
+.react-calendar__navigation__prev-button {
+  color: white;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: white;
+  opacity: 0.2;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus,
+ .react-calendar__tile--active {
+  background: #f7f7f7;
+  border-radius: 100px;
+  color: rgb(123, 12, 64);
+}
+/* Actual day */
+.react-calendar__tile--now{
+  background: rgb(123, 12, 64);
+  color: white;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+
+
 .listHours{
   display: flex;
   flex-direction: column;
@@ -23,4 +71,16 @@
 }
 .disponibility {
   margin-left: 20px;
+}
+
+
+#delay {
+  border-style: solid;
+  background-color: rgb(155, 155, 155);
+  border-width: 0.5px;
+  border-radius: 5px;
+}
+#timeRdv {
+  color:rgb(213, 213, 213);
+  text-align: center;
 }

@@ -1,0 +1,13 @@
+#labelName {
+    color: white
+}
+.infos{
+   border-style: solid; 
+   border-width: 0.2px;
+   border-radius: 10px;
+   height: 100px;
+   width: 400px;
+   display: flex;
+    align-items: center;
+    flex-direction: column;
+}

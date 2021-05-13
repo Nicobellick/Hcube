@@ -1,0 +1,13 @@
+.all {
+    display: flex;
+    flex-direction: column;
+    border-style: ridge;
+    padding: 30px 30px 30px 30px;
+    background-color: rgb(123, 12, 64);
+}
+.listRdv {
+    color: rgb(187, 187, 187)
+}
+.react-calendar {
+    align-self: center;
+}
